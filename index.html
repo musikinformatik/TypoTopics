@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta property="og:title" content="tYPOtOPICS" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="typotopics.musikinformatik.net" />
+    <meta property="og:site_name" content="tYPOtOPICS" />
+    <meta property="og:description" content="LiveCoding / 2023-07-01 / Erkratherstraße 365" />
+    <meta property="og:image" content="https://typotopics.musikinformatik.net/assets/teaser.png" />
+    <meta property="og:image:alt" content="tYPOtOPICS" />
+    <meta name="description" content="tYPOtOPICS / 2023-07-01 / Erkratherstraße 365" />
+
     <title>tYPOtOPICS</title>
 </head>
 
@@ -214,7 +225,9 @@
 
     const draw = () => {
         if (Math.random() < 0.1) {
-            document.getElementById("name").textContent = changeText("TypoTOpics");
+            const newText = changeText("TypoTOpics");
+            document.getElementById("name").textContent = newText;
+            document.title = newText;
         };
 
         const spiral = Array.from({ length: 35 }, (_, i) => [
