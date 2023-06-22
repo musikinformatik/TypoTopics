@@ -8,7 +8,7 @@
     <div id="main">
         <div class="content mono">
             <h1 id="name">TypoTOpics</h1>
-            <dialog id="dialog" style="max-width: 800px; min-width: 60%;">
+            <dialog id="dialog" style="max-width: 800px; min-width: 60%; overflow-y: initial !important;">
                 <div id="wrapper" style="display: flex;">
                     <div id="left" style="flex: 0 0 65%;"><h2 id="dialog-name">artist name</h2></div>
                     <div id="right" style="flex: 1;"><span id="close-dialog" style="float: right;">close</span></div>
@@ -138,6 +138,18 @@
     a {
         color: inherit;
         text-decoration: inherit;
+    }
+
+    #dialog-name {
+        font-size: 4.5vh;
+    }
+
+    #close-dialog {
+        font-size: 2.5vh;
+    }
+
+    #dialog-text {
+        font-size: 2.5vh;
     }
 </style>
 
