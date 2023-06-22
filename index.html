@@ -8,11 +8,17 @@
     <div id="main">
         <div class="content mono">
             <h1 id="name">TypoTOpics</h1>
+            <dialog id="dialog" style="max-width: 800px; min-width: 60%;">
+                <div id="wrapper" style="display: flex;">
+                    <div id="left" style="flex: 0 0 65%;"><h2 id="dialog-name">artist name</h2></div>
+                    <div id="right" style="flex: 1;"><span id="close-dialog" style="float: right;">close</span></div>
+                </div>
+                <span id="dialog-text"></span>
+            </dialog>
             <div class="artists">
                 <ul class="artist">
                     <li>Camila Agudelo Mejía</li>
-                    <li>Sebastián Fecke Díaz</li>
-                    <li>&nbsp&nbsp & David Hanrathshy</li>
+                    <li>Sebastián Fecke Díaz<br/>&nbsp&nbsp & David Hanrathshy</li>
                     <li>Oleg Krokhalev</li>
                     <li>Natalia Molina Bohórquez</li>
                     <li>Tobias Rink</li>
@@ -45,6 +51,10 @@
         font-family: "MajorMono";
         src: url(./assets/MajorMonoDisplay-Regular.ttf) format("truetype");
     }
+
+    /* dialog:not([open]) {
+  display: none;
+} */
 
     @keyframes bg {
         0% {
@@ -135,6 +145,47 @@
     import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
 
     const randomSeed = Math.random();
+
+    const data = {
+        "Camila Agudelo Mejía": `Musik für den Innenhof
+        
+        
+        „Musik für den Innenhof“ ist eine Mehrkanalinstallation für 6 Lautsprecher und 1 Performerin, die das Ergebnis eines Beobachtungsprozess im Innenhof zeigt. Camila Agudelo Mejía erforscht in diesem Projekt die Dynamik zwischen privatem und öffentlichem Raum sowie die Verlauf der Zeit von der Perspektive eines Beobachters.
+        \n\n
+        Um die Klänge und Geräusche der Nachbarschaft aus der Ferne aufzufangen, richtete Camila für mehrere Tage lang ihr Haus als Abhörzentrale ein. Die vom Innenhof gemachten Aufnahmen bilden die Partitur des Stücks, in dem jedes Ereignis vom Performerin live neu interpretiert und abstrahiert wird.
+        `,
+        "Entidades polimórficas": `Paulo Simón García und Martin Guis
+        \n\n
+        Entidades polimórficas ist ein experimentelles Duo, das im Jahr 2023 im Seminar für Computermusik am Institut für Musik und Medien der Robert Schumann Musikhochschule Düsseldorf von Martin Gius und Paulo Simón gegründet worden ist. Es stellt eine Möglichkeit dar, die Signale der unmittelbaren Umgebung zu entschlüsseln, sie durch Improvisation zu verändern und sie in rhythmische Entitäten mit fließenden Bewegungen umzucodieren, die aus Live-Coding, Performance oder analoge Instrumente entstehen können und die die etablierten Beziehungen zwischen kulturellen, logischen und technologischen Strukturen in Frage stellen. Sie haben bereits Auftritte in Veranstaltungsorten wie The Pool im Rahmen der vom Toplap Düsseldorf organisierten Code-Konzerte zusammen mit dem ICLC und im WP8 im Rahmen eines Konzerts zum Thema experimenteller Anti-Folklore, das von der Künstlerverein Düsseldorf unterstützt wurde, gehabt. 
+        `,
+        "Natalia Molina Bohórquez": `I'm sitting in a flute
+        
+        I'm sitting in a flute ist das Soloprojekt von Natalia Molina, einer Flötistin, deren Interessen zwischen Improvisation, experimentelle Musik, Klangkunst und künstlerische Forschung schwanken. 
+
+        "Klangen durch der Flöte: aus der Flöte" "Flöte als Raum"  und "Feedback in der Flöte/mit der Flöte zu erzeugen": sind die Ideen, dass sie in ihrem Projekt untersucht.
+        `,
+        "Sebastián Fecke Díaz   & David Hanrathshy": `Hyalalie·a·la·lie: von altgriechisch hyalos, „Glas“ und griechisch laléō „ich rede“`,
+        "Dennis Scheiba": `Klingelton-Manie
+            Das Publikum kann mit seinem Smartphone ein Teil eines Netzwerkes aus Lautsprechern werden. Das Lautsprecher-Netzwerk wird über das Internet koordiniert und wird Live aus dem Raum heraus gecodet.`,
+        
+    }
+
+    Array.from(document.querySelectorAll('.artist li')).forEach((x) => {
+        const artist = x.textContent;
+        x.addEventListener("click", () => {
+            document.getElementById("dialog-name").textContent = artist;
+            document.getElementById("dialog-text").textContent = data[artist] ? data[artist] : "no info" ;
+            document.getElementById("dialog").showModal();
+        });
+    });
+
+    // document.getElementById("show-modal-dialog").addEventListener("click", () => {
+    //     document.getElementById("dialog").showModal();
+    // });
+
+    document.getElementById("close-dialog").addEventListener("click", () => {
+        document.getElementById("dialog").close();
+    });
 
     const svg = d3
         .create("svg")
