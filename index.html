@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<head>
+    <title>tYPOtOPICS</title>
+</head>
+
+<body>
+    <div id="main">
+        <div class="content mono">
+            <h1 id="name">TypoTOpics</h1>
+            <div class="artists">
+                <ul class="artist">
+                    <li>Camila Agudelo Mejía</li>
+                    <li>Sebastián Fecke Díaz</li>
+                    <li>Oleg Krokhalev</li>
+                    <li>Natalia Molina Bohórquez</li>
+                    <li>Tobias Rink</li>
+                    <li>Dennis Scheiba</li>
+                    <li>Pamela Soria</li>
+                    <li>Yasuko Yui</li>
+                    <li> </li><br />
+                    <li>Xayíde y la reina de las legumbres</li>
+                    <li>Entidades polimórficas</li>
+                </ul>
+            </div>
+            <div class="event">
+                <a href="https://www.openstreetmap.org/way/124976477">
+                    <ul class="venue">
+                        <li>Samstag, 01.07.2023</li>
+                        <li>17.00 bis 22.00 Uhr</li>
+                        <li>ES365</li>
+                        <li>Erkratherstraße 365</li>
+                        <li>40231 Düsseldorf</li>
+                    </ul>
+                </a>
+            </div>
+        </div>
+        <div id="container"></div>
+    </div>
+</body>
+
+<style>
+    @font-face {
+        font-family: "MajorMono";
+        src: url(./assets/MajorMonoDisplay-Regular.ttf) format("truetype");
+    }
+
+    @keyframes bg {
+        0% {
+            filter: invert(0.0);
+        }
+
+        50% {
+            filter: invert(0.15);
+        }
+
+        55% {
+            filter: invert(0.85);
+        }
+
+        100% {
+            filter: invert(1.0);
+        }
+    }
+
+    html {
+        background-color: white;
+        color: black;
+        animation: bg;
+        animation-duration: 30s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 10.5vw;
+        ;
+        font-weight: bolder;
+        /* width: 100%; */
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .event {
+        position: absolute;
+        bottom: 0;
+        font-size: 2.5vh;
+    }
+
+    ul.artist {
+        rotate: 6deg;
+        color: red;
+        font-size: 2.5vh;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'MajorMono', Courier, monospace;
+    }
+
+    .mono {
+        color: black;
+        /* mix-blend-mode: difference; */
+    }
+
+    .content {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    #container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    #main {
+        max-height: 100%;
+        min-height: 100%;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: inherit;
+    }
+</style>
+
+<script type="module">
+    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+    const randomSeed = Math.random();
+
+    const svg = d3
+        .create("svg")
+        .attr("viewBox", [0, 0, 200, 400])
+    // .style("max-width", "00px");
+
+    const g = svg.append("g").attr("transform", "translate(100,250)");
+
+    const changeText = (text) => {
+        return text.toLowerCase().split('').map(function (c) {
+            return Math.random() < .5 ? c : c.toUpperCase();
+        }).join('');
+    }
+
+    const draw = () => {
+        if (Math.random() < 0.1) {
+            document.getElementById("name").textContent = changeText("TypoTOpics");
+        };
+
+        const spiral = Array.from({ length: 35 }, (_, i) => [
+            ((Math.PI / 3) * i) * (Date.now() / 100000), // angle (in radians)
+            (2 * i % 10) * i * 2 // radius
+        ]);
+
+        const spiralData = d3.lineRadial()(spiral);
+
+        d3.selectAll("g > path").remove();
+
+        svg.select("g").append("path")
+            .attr("class", "radial")
+            .attr("d", spiralData)
+            .attr("stroke", "black")
+            .attr("fill", "none");
+    };
+
+    container.append(svg.node());
+
+    setInterval(function () {
+        draw();  // call the function you created to update the chart
+    }, 1000 / 60);
+</script>
