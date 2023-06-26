@@ -29,13 +29,15 @@
             <div class="artists">
                 <ul class="artist">
                     <li>Camila Agudelo Mejía</li>
+                    <li key="SchMetaling">SchMetaling<br/>
+                        &nbsp&nbsp Tobias Rink<br/>
+                        &nbsp&nbsp Yasuko Yui<br/>
+                        &nbsp&nbsp Oleg Krokhalev
+                    </li>
                     <li>Sebastián Fecke Díaz<br/>&nbsp&nbsp & David Hanraths</li>
-                    <li>Oleg Krokhalev</li>
                     <li>Natalia Molina Bohórquez</li>
-                    <li>Tobias Rink</li>
                     <li>Dennis Scheiba</li>
                     <li>Pamela Soria</li>
-                    <li>Yasuko Yui</li>
                     <li> </li><br />
                     <li>Xayíde y la reina de las legumbres</li>
                     <li>Entidades polimórficas</li>
@@ -171,14 +173,10 @@
 
     const data = {
         "Camila Agudelo Mejía": `Musik für den Innenhof
-        
-        
         „Musik für den Innenhof“ ist eine Mehrkanalinstallation für 6 Lautsprecher und 1 Performerin, die das Ergebnis eines Beobachtungsprozess im Innenhof zeigt. Camila Agudelo Mejía erforscht in diesem Projekt die Dynamik zwischen privatem und öffentlichem Raum sowie die Verlauf der Zeit von der Perspektive eines Beobachters.
-        \n\n
         Um die Klänge und Geräusche der Nachbarschaft aus der Ferne aufzufangen, richtete Camila für mehrere Tage lang ihr Haus als Abhörzentrale ein. Die vom Innenhof gemachten Aufnahmen bilden die Partitur des Stücks, in dem jedes Ereignis vom Performerin live neu interpretiert und abstrahiert wird.
         `,
         "Entidades polimórficas": `Paulo Simón García und Martin Guis
-        \n\n
         Entidades polimórficas ist ein experimentelles Duo, das im Jahr 2023 im Seminar für Computermusik am Institut für Musik und Medien der Robert Schumann Musikhochschule Düsseldorf von Martin Gius und Paulo Simón gegründet worden ist. Es stellt eine Möglichkeit dar, die Signale der unmittelbaren Umgebung zu entschlüsseln, sie durch Improvisation zu verändern und sie in rhythmische Entitäten mit fließenden Bewegungen umzucodieren, die aus Live-Coding, Performance oder analoge Instrumente entstehen können und die die etablierten Beziehungen zwischen kulturellen, logischen und technologischen Strukturen in Frage stellen. Sie haben bereits Auftritte in Veranstaltungsorten wie The Pool im Rahmen der vom Toplap Düsseldorf organisierten Code-Konzerte zusammen mit dem ICLC und im WP8 im Rahmen eines Konzerts zum Thema experimenteller Anti-Folklore, das von der Künstlerverein Düsseldorf unterstützt wurde, gehabt. 
         `,
         "Natalia Molina Bohórquez": `I'm sitting in a flute
@@ -192,14 +190,17 @@
             Das Publikum kann mit seinem Smartphone ein Teil eines Netzwerkes aus Lautsprechern werden. Das Lautsprecher-Netzwerk wird über das Internet koordiniert und wird Live aus dem Raum heraus gecodet.`,
         "Xayíde y la reina de las legumbres": `Lustiger ? Kichererbseneintopf
             Das von Camila Agudelo und Danielle Muñoz entstande Duo forscht die Kapazitätsmatrix einiger lateinamerikanischen Rhythmen und Gewürzen, um durch improvisation neue Gerichte zu schaffen.`,
-        
+        "Pamela Soria": "Theatrics: Ein kleines elektroakustisches Stück für 2 Lautsprecher und 1 Performer. Es war als Experiment konzipiert, bei dem eine Komponistin versucht, SuperCollider als Leerraum zu nutzen, um den Klang entsprechend dem Publikum und dem Raum zu verlängern.",
+        "SchMetaling": `Das Projekt SchMetaling ist ein "Ökosystem", das auf dem Prinzip des Schmetterlingseffekts beruht. Es wurde von Edward Lorenz entdeckt und zeigt ein System, das auf Kausalität basiert. Jede kleine Entscheidung kann zu einer dramatischen Veränderung des Systems führen, die von jedem Zuhörer anders aufgenommen und verarbeitet wird. Der erzeugte Klang durchläuft mehrere Filter, digitale und akustische Effekte, welche ihn formen. Alle drei Interpreten sind bei der Erzeugung eines gemeinsamen Klangs miteinander verbunden.`,
     }
 
     Array.from(document.querySelectorAll('.artist li')).forEach((x) => {
-        const artist = x.textContent;
+        const artistName = x.textContent;
+        const artistLookup = x.getAttribute("key") ?? artistName;
         x.addEventListener("click", () => {
-            document.getElementById("dialog-name").textContent = artist;
-            document.getElementById("dialog-text").textContent = data[artist] ? data[artist] : "no info" ;
+            console.log(artistLookup);
+            document.getElementById("dialog-name").textContent = artistName;
+            document.getElementById("dialog-text").textContent = data[artistLookup] ?? "no info" ;
             document.getElementById("dialog").showModal();
         });
     });
